@@ -1,0 +1,44 @@
+{
+    "$schema": "../node_modules/@lobehub/chat-plugin-sdk/schema.json",
+    "api": [
+      {
+        "url": "https://gpt2sheet.nvr.cn/generate-csv",
+        "name": "MakeASheet",
+        "gateway": "http://192.168.8.184:3000/",
+        "description": "This tool generates CSV files. Supply this tool an array of arrays, which will then be converted into a CSV file and hosted publicly.\n\nYou should present a few rows of realistic data in a Markdown table format to the user for review the structure, and ask if the user wants any changes, or if you can proceed. If the user wants any changes, you can modify the data accordingly. Once the user is satisfied, then and only then send the final array of arrays to the tool.\n\nThe tool will then generate the file and provide a new download link. Remember to inform the user that the data shown in the table is only the structure and you will generate the final CSV file when the user confirms the structure.\n\nIf the user requests further modifications to the data, you can make the changes and have the tool generate a new file.\n\nIt would be a good idea to provide some realistic data to the user.",
+        "parameters": {
+          "method": "POST", 
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "An array of arrays to be converted to CSV. Each array represents a row in the CSV file.",
+              "items": {
+                "type": "array",
+                "items": {}
+              }
+            },
+            "title": {
+              "type": "string",
+              "description": "A single line of text to be used as the title of the CSV file (can have spaces)."
+            }
+          },
+          "required": ["data", "title"],
+          "type": "object"
+        }
+      }
+    ],
+    "author": "Wendy Li",
+    "createdAt": "2024-10-22",
+    "identifier": "make_sheet_local",
+    "meta": {
+      "avatar": "📎",
+      "tags": ["csv", "excel", "sheet"],
+      "title": "下载CSV文件",
+      "description": "Generate a csv file that can directly download and open in excel.",
+      "category": "tools"
+    },
+    "schemaVersion": 1
+  }
